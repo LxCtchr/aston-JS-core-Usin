@@ -22,21 +22,47 @@ const copied3 = JSON.parse(JSON.stringify(counter6));
 console.log(copied1, copied2, copied3);
 
 // Задание 3. Создать функцию makeCounter всеми описанными и возможными способами;
-function makeCounter1() { };
-const makeCounter2 = function () { };
-const makeCounter3 = function withName() { }; // NFE
-const makeCounter4 = () => { };
+function makeCounter1() {
+  let count;
+  
+  return function () {
+    return count++;
+  }
+};
+const makeCounter2 = function () {
+  let count;
 
-function Counter(x, y) {
-  this.x = x;
-  this.y = y;
+  return function () {
+    return count++;
+  }
+};
+const makeCounter3 = function withName() { // NFE
+  let count;
 
-  this.getXY = function () {
-    return `X: ${this.x} and Y: ${this.y}`
+  return function withNameInside() {
+    return count++;
+  }
+}; 
+const makeCounter4 = () => {
+  let count;
+
+  return () => {
+    return count++;
+  };
+};
+
+function Counter(number) {
+  this.number = number;
+
+  this.count = function () {
+    return ++this.number
   }
 }
-const makeCounter5 = new Counter(1, 2); // Через конструктор
-console.log(makeCounter5.getXY());
+const makeCounter5 = new Counter(0); // Через конструктор
+
+console.log(makeCounter5.count());
+
+console.log(makeCounter1(), makeCounter2(), makeCounter3(), makeCounter4());
 
 // Бонус. Задание 1. Написать функцию глубокого сравнения двух объектов:
 const obj1 = {
