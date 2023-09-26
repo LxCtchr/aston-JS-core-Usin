@@ -47,11 +47,9 @@ doSmth()
 
 const arr = [10, 12, 15, 21];
 let i = 0;
-let current;
 const interval = setInterval(() => {
   if (i < arr.length) {
-    current = i;
-    console.log(current);
+    console.log(i);
     ++i;
   } else clearInterval(interval);
 }, 3000);
